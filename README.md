@@ -1,6 +1,5 @@
-# For use you mast have
+# Automatical Script and Vm
 
-1.Vagrant version 1.4.3.1
-2.Virtualbox 4.3.36
-3.Ansible 1.5.4
+This repository contains a collections of Automatical Script and Virtual Mashines. 
+
 #
