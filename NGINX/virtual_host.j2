@@ -1,0 +1,9 @@
+server {
+	listen 80;
+	server_name app-serv;
+
+	location / {
+		include uwsgi_params;
+		uwsgi_pass 10.0.2.3:3031;
+		}
+}
