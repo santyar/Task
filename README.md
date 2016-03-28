@@ -6,17 +6,17 @@ This repository contains a collections of Automatical Script and Virtual Mashine
 To use the vagrant file? you will need have done the following:
 
 
-1.Download and install VirtualBox
-2.Download and install Vagrant
-3.Install Ansible
+1.Download and install VirtualBox\n
+2.Download and install Vagrant\n
+3.Install Ansible\n
 
 
 
 Once all that is done? you can simply type in [vagrant up], and Vagrant create two new VM, install the base box, and configure it.
 
-You can log into it via SSH:[
-  1.[sudo vagrant ssh nginx]--and you into Server VM
-  2.[sudo vagrant ssh Python]--and you into Python VM
+You can log into it via SSH:\n
+  1.[sudo vagrant ssh nginx]--and you into Server VM\n
+  2.[sudo vagrant ssh Python]--and you into Python VM\n
 
 
  
