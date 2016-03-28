@@ -3,12 +3,12 @@
 This repository contains a collections of Automatical Script and Virtual Mashines. 
 
 
-To use the vagrant file? you will need have done the following:
+To use the vagrant file, you will need have done the following:
 
 
-1.Download and install VirtualBox\n
-2.Download and install Vagrant\n
-3.Install Ansible\n
+1.Download and install VirtualBox/\n
+2.Download and install Vagrant/\n
+3.Install Ansible/\n
 
 
 
