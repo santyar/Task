@@ -12,9 +12,9 @@ To use the vagrant file, you will need have done the following:
 
 
 
-Once all that is done? you can simply type in [vagrant up], and Vagrant create two new VM, install the base box, and configure it.
+Once all that is done, you can simply type in [vagrant up], and Vagrant create two new VM, install the base box, and configure it.
 
-#You can log into it via SSH:\n
+#You can log into it via SSH:
   1. [sudo vagrant ssh nginx]--and you into Server VM\n
   2. [sudo vagrant ssh Python]--and you into Python VM\n
 
