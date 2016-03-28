@@ -1,0 +1,54 @@
+---
+
+- hosts: nginx
+  tasks:
+    - name: 1. Update
+      apt: update_cache=yes #chache_valid_time=3600
+  #    sudo: yes
+   # - name: 1.1 Instal ip
+    #  inline: "ifconfig eth2 10.0.2.3 netmask 255.255.255.0 up"
+ 
+    - name: 2. Instal nginx
+      apt: name=nginx state=present
+ #     sudo: yes
+
+    - name: 3. Run nginx
+      service: name=nginx state=running enabled=yes
+    - name: 3.1 Change in hosts
+      lineinfile: dest=/etc/hosts insertafter="^127.0.0.1" line="127.0.0.1\tapp-serv"	
+#      sudo: yes 
+
+    - name: 4. Create virtual host
+      template: src=NGINX/virtual_host.j2 dest=/etc/nginx/sites-available/app-serv
+      #notify: nginx reload  
+   
+    - name: 5. Create symlinks to sites
+      file: src=/etc/nginx/sites-available/app-serv dest=/etc/nginx/sites-enabled/app-serv state=link
+     # otify: nginx restart
+    - name: 6. Reastart Server
+      service: name=nginx state=restarted
+
+- hosts: Python
+  tasks:
+
+    - name: 1. Update
+      apt: update_cache=yes
+
+    - name: 2. Instal uwsgi
+      apt: name=python-dev state=present
+    - name: 2.2 Install
+      apt: name=uwsgi-plugin-python state=present
+      apt: name=python-pip  state=present
+      apt: name=python-virtualenv state=present
+    - name: 3. Install Flask
+      pip: name=Flask
+      pip: name=uwsgi
+
+    - name: 3.1 Change in hosts
+      lineinfile: dest=/etc/hosts insertafter="^127.0.0.1" line="10.0.2.3\tapp-serv"  
+       
+    - name: 3.2 create directory
+      file: path=/var/www state=directory mode=0755
+
+    - name: 4. Create app
+      copy: src=py_app.py dest=/var/www/py_app.py owner=root group=root mode=064   	
