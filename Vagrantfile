@@ -8,11 +8,10 @@
 Vagrant.configure(2) do |config|
  
 # config.vm.network "public_network", auto_config: false
-
  config.vm.define "nginx" do  |web|
    web.vm.box = "hashicorp/precise32"
    web.vm.network "public_network", auto_config: false
-   web.vm.network "forwarded_port", guest: 80, host: 8081
+   web.vm.network "forwarded_port", guest: 80, host: 8082
    
    web.vm.provider "virtualbox" do |vb|
      vb.name = "Server"
@@ -23,9 +22,6 @@ Vagrant.configure(2) do |config|
    web.vm.provision "shell",
      run: "always",
      inline: "ifconfig eth1 10.0.2.3 netmask 255.255.255.0 up"
-#	ansible.playbook = "playbook.yml"
-#	ansible.sudo = true
-   #end 
  end
 
  config.vm.define "Python" do  |py|
@@ -33,27 +29,20 @@ Vagrant.configure(2) do |config|
    py.vm.network "public_network", auto_config: false 
  #  py.vm.network "forwarded_port", guest: 22, host: 10122, id: "ssh"
 
-    py.vm.provider "virtualbox" do |vb|
+   py.vm.provider "virtualbox" do |vb|
      vb.name = "Application"
      vb.memory = "512"
      vb.cpus = "1"
-    end
+   end
 
- py.vm.provision "shell",
+   py.vm.provision "shell",
      run: "always",
      inline: "ifconfig eth1 10.0.2.4 netmask 255.255.255.0 up"
-     inline: "uwsgi --socket 10.0.2.4:3031 --wsgi-file /var/www/*py --callable app --processes 4 --threads 2 --stats 127.0.0.1:9191"
-
-    #py.vm.provision "ansible" do |ansible|
-     #   ansible.playbook = "playbook.yml"
-      #  ansible.sudo = true
-    #end 
+  #  inline: "uwsgi --socket 10.0.2.4:3031 --wsgi-file /var/www/*py --callable app --processes 4 --threads 2 --stats 127.0.0.1:9191"
  end
 
  config.vm.provision "ansible" do |ansible|
         ansible.playbook = "playbook.yml"
         ansible.sudo = true
  end
-
-
 end

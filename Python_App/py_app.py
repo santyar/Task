@@ -1,14 +1,14 @@
 
 
 
-from flesk import Flesk,send_file
+from flask import Flask,send_file
 
 app=Flask(__name__)
 
 @app.route('/')
 def hello():
 	return "<H1 style='color:blue'>Hello from Flassk freamwork!</H1>"
-@app.rote('/image')
+@app.route('/image')
 def hello_image():
 	filename='welcom.jpg'
 	return send_file(filename, mimetype='image/gif')
